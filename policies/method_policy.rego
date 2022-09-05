@@ -67,10 +67,10 @@ allow["ActionAllowedForSpecificObject"] {
 	}
 }
 
-# Allow access when action is NONE and at least one action allowed is allowed for requested resource
+# Allow access when action is ANY and at least one action allowed is allowed for requested resource
 allow["AtLeastOneActionOnResource"] {
-	# requested action is NONE
-	input.requestedResource.action == "NONE"
+	# requested action is ANY
+	input.requestedResource.action == "ANY"
 	
 	# find requested resource between permissions
 	some r in input.principal.permissions.resources
@@ -80,10 +80,10 @@ allow["AtLeastOneActionOnResource"] {
 	count(r.actions) > 0	
 }
 
-# Allow access when action is NONE and at least one action allowed is allowed for requested resource
+# Allow access when action is ANY and at least one action allowed is allowed for requested resource
 allow["AtLeastOneActionOnObject"] {
-	# Requested action is NONE
-	input.requestedResource.action == "NONE"
+	# Requested action is ANY
+	input.requestedResource.action == "ANY"
 	# requested contains uuids of specific objects
 	input.requestedResource.uuids
 	
@@ -104,7 +104,7 @@ allow["AtLeastOneActionOnObject"] {
 	}
 }
 
-# TODO no uuids and NONE
+# TODO no uuids and ANY
 
 # Allows access to anonymous users to selected set of resources
 allow["Anonymous"] {
