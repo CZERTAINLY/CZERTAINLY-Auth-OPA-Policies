@@ -21,7 +21,7 @@ The input data is needed for OPA policy to successfully evaluate permissions for
 
 Input data should contain at least information about the user, associated roles, requested resources to access and execute operation, and permissions.
 
-You can find sample input on here: [input.json](samples/input.json).
+You can find sample input here: [input.json](samples/input.json).
 
 ## Docker container
 
