@@ -23,7 +23,7 @@ allow["AllActionsAllowedOnResource"] {
 	r.allowAllActions == true
 }
 
-# Allow access when requested action is allowed on requeted resource
+# Allow access when requested action is allowed on requested resource
 allow["ActionAllowedOnResource"] {
 	# find requested resource between permissions
 	some r in input.principal.permissions.resources
@@ -124,8 +124,6 @@ allow["Anonymous"] {
 	requestedResource in resourcesWithAnonymousAccess	
 }
 
-# TODO parentUUIDS
-
 # Deny access when requested action is forbidden for given object
 deny["ActionDeniedForSpecificObject"] {
 	# requested contains uuids of specific objects
@@ -146,6 +144,5 @@ deny["ActionDeniedForSpecificObject"] {
 	some uuid in input.requestedResource.uuids 
 	uuid in forbiddenUUIDs
 }
-
 
 default authorized = false

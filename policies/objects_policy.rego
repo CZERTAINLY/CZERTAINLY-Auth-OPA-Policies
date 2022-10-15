@@ -2,7 +2,7 @@ package objects
 
 import future.keywords.in
 # Provides a list of uuids for which the requested action is permitted on the resource and for which it is denied.
-# Retruns array of allowedObjects and forbiddenObjects and boolean value actionAllowedForGroupOfObjects.
+# Returns array of allowedObjects and forbiddenObjects and boolean value actionAllowedForGroupOfObjects.
 # The actionAllowedForGroupOfObjects specifies whether the user has access to all objects or only those explicitly allowed.
 # When false, the user can access only objects to which access is explicitly allowed.
 # When true, the user can access all objects except those to which access is explicitly forbidden.
@@ -10,7 +10,7 @@ import future.keywords.in
 
 # Allow action for all objects except those explicitly forbidden
 # as all resources are allowed
-# TODO lepsi pojmenovani 
+# TODO find better naming for the property
 actionAllowedForGroupOfObjects {
 	input.principal.permissions.allowAllResources == true	
 }
