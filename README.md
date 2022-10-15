@@ -15,86 +15,13 @@ The following policies are available to evaluate permissions:
 OPA can periodically download bundles of policies and data from remote HTTP servers. The policies and data are loaded on the fly without requiring a restart of OPA.
 Once the policies and data have been loaded, they are enforced immediately.
 
-### OPA permission evaluation input
+## Input to OPA evaluation
 
-When permissions need to be checked, part of request to OPA and its specified policy is following input data. Based on input data, policy generates its decision and allow or deny access for the request.   
-```json
-{
-  "input":
-  {
-    "details": {},
-    "principal": {
-      "roles": [
-        "test-role"
-      ],
-      "user": {
-        "createdAt": "2022-10-14T21:51:26.995274+00:00",
-        "description": null,
-        "email": "test@test.com",
-        "enabled": true,
-        "firstName": "Test",
-        "lastName": "Test",
-        "systemUser": false,
-        "updatedAt": "2022-10-14T21:51:26.995318+00:00",
-        "username": "test",
-        "uuid": "8fbd0d41-03af-4376-b2f6-0abc44c37364"
-      },
-      "requestedResource": {
-        "action": "detail",
-        "name": "raProfiles",
-        "uuids": [
-          "d7d5b6e6-0335-4492-a994-6120751fced1"
-        ]
-      },
-      "permissions": {
-        "allowAllResources": false,
-        "resources": [
-          {
-            "name": "authorities",
-            "allowAllActions": false,
-            "actions": [],
-            "objects": [
-              {
-                "name": "EJBCA-NG-Authority",
-                "uuid": "279547ae-62b1-4141-8aa1-a579eb343b74",
-                "allow": [
-                  "list",
-                  "detail"
-                ],
-                "deny": []
-              }
-            ]
-          },
-          {
-            "name": "certificates",
-            "allowAllActions": true,
-            "actions": [],
-            "objects": []
-          },
-          {
-            "name": "raProfiles",
-            "allowAllActions": false,
-            "actions": [
-              "detail",
-              "list"
-            ],
-            "objects": [
-              {
-                "name": "NG-RA-Profile1",
-                "uuid": "d7d5b6e6-0335-4492-a994-6120751fced1",
-                "allow": [],
-                "deny": [
-                  "delete"
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    }
-  }
-}
-```
+The input data is needed for OPA policy to successfully evaluate permissions for the user and provide decision. When no input is provided, decision is denied by default.
+
+Input data should contain at least information about the user, associated roles, requested resources to access and execute operation, and permissions.
+
+You can find sample input on here: [input.json](samples/input.json).
 
 ## Docker container
 
