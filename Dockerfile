@@ -1,5 +1,7 @@
 FROM nginx:1.20.0-alpine as build
 
+MAINTAINER CZERTAINLY <support@czertainly.com>
+
 COPY ./policies /usr/share/nginx/html/bundles/policies
 
 WORKDIR /usr/share/nginx/html/bundles
