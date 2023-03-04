@@ -25,7 +25,9 @@ allow["AnonymousUser"] {
     
     # define urls that can be accessed by anonymous user
     allowedEndpoints := {
-        ["v1", "connector", "register"]
+        ["v1", "connector", "register"],
+        ["v1", "health", "liveness"],
+        ["v1", "health", "readiness"]
     }
 
     # check if the requested url belongs to the set of allowed ones
