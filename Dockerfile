@@ -1,4 +1,6 @@
-FROM nginx:1.20.0-alpine
+FROM nginx:1.20.0-alpine as build
+
+MAINTAINER CZERTAINLY <support@czertainly.com>
 
 COPY ./policies /usr/share/nginx/html/bundles/policies
 
@@ -8,3 +10,7 @@ RUN curl -L -o opa https://openpolicyagent.org/downloads/v0.45.0/opa_linux_amd64
 RUN ./opa build -b policies
 RUN rm -r policies && rm opa
 
+# package to rootless image
+FROM nginxinc/nginx-unprivileged:1.23.3-alpine
+
+COPY --from=build /usr/share/nginx/html /usr/share/nginx/html
