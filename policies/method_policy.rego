@@ -67,6 +67,30 @@ allow["ActionAllowedForSpecificObject"] {
 	}
 }
 
+# Allow access when any group object UUIDs is in allowed objects for groups members action
+allow["ActionAllowedForSpecificObjectBasedOnGroupMembership"] {
+	# requested contains uuids of specific objects
+	input.requestedResource.uuids
+
+	input.requestedResource.name == "groups"
+	input.requestedResource.action == "members"
+	
+	# find requested resource between permissions
+	some r in input.principal.permissions.resources
+	r.name == input.requestedResource.name
+	
+	# get all objects uuids for which the action is allowed
+	allowedUUIDs := [ uuid | 
+		some o in r.objects
+		input.requestedResource.action in o.allow
+		uuid := o.uuid
+	]
+
+	# check that array of allowedUUIDs conatins any of requested uuids
+	some uuid in input.requestedResource.uuids
+	uuid in allowedUUIDs
+}
+
 # Allow access when action is ANY and at least one action allowed is allowed for requested resource
 allow["AtLeastOneActionOnResource"] {
 	# requested action is ANY
