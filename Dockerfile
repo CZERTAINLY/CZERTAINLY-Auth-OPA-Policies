@@ -6,8 +6,8 @@ COPY ./policies /usr/share/nginx/html/bundles/policies
 
 WORKDIR /usr/share/nginx/html/bundles
 
-RUN curl --proto "=https" -L -o opa https://openpolicyagent.org/downloads/v0.53.1/opa_linux_amd64_static && chmod 755 ./opa
-RUN ./opa build -b policies
+ADD https://openpolicyagent.org/downloads/v0.53.1/opa_linux_amd64_static ./opa
+RUN chmod 755 ./opa && ./opa build -b policies
 RUN rm -r policies && rm opa
 
 # package to rootless image
