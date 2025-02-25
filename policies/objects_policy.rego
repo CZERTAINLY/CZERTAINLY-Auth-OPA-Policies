@@ -1,6 +1,5 @@
 package objects
 
-import future.keywords.in
 # Provides a list of uuids for which the requested action is permitted on the resource and for which it is denied.
 # Returns array of allowedObjects and forbiddenObjects and boolean value actionAllowedForGroupOfObjects.
 # The actionAllowedForGroupOfObjects specifies whether the user has access to all objects or only those explicitly allowed.
@@ -11,13 +10,13 @@ import future.keywords.in
 # Allow action for all objects except those explicitly forbidden
 # as all resources are allowed
 # TODO find better naming for the property
-actionAllowedForGroupOfObjects {
+actionAllowedForGroupOfObjects if {
 	input.principal.permissions.allowAllResources == true	
 }
 
 # Allow action for all objects except those explicitly forbidden
 # as all actions for requested resource are allowed
-actionAllowedForGroupOfObjects {
+actionAllowedForGroupOfObjects if {
 	# find requested resource between permissions
 	some r in input.principal.permissions.resources
 	r.name == input.requestedResource.name
@@ -28,7 +27,7 @@ actionAllowedForGroupOfObjects {
 
 # Allow action for all objects except those explicitly forbidden
 # as requested action is allwed on requested resource
-actionAllowedForGroupOfObjects {
+actionAllowedForGroupOfObjects if {
 	# find requested resource between permissions
 	some r in input.principal.permissions.resources
 	r.name == input.requestedResource.name
@@ -38,7 +37,7 @@ actionAllowedForGroupOfObjects {
 }
 
 # Find uuids of objects for which the requested action is explicitly allowed
-allowedObjects[object.uuid] {
+allowedObjects[object.uuid] if {
 	# find requested resource between permissions
     some r in input.principal.permissions.resources
 	r.name == input.requestedResource.name
@@ -49,7 +48,7 @@ allowedObjects[object.uuid] {
 }
 
 # Find uuids of objects for which the requested action is explicitly forbidden
-forbiddenObjects[object.uuid] {
+forbiddenObjects[object.uuid] if {
 	# find requested resource between permissions
     some r in input.principal.permissions.resources
 	r.name == input.requestedResource.name

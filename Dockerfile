@@ -6,7 +6,7 @@ COPY ./policies /usr/share/nginx/html/bundles/policies
 
 WORKDIR /usr/share/nginx/html/bundles
 
-ADD https://openpolicyagent.org/downloads/v0.53.1/opa_linux_amd64_static ./opa
+ADD https://openpolicyagent.org/downloads/v1.1.0/opa_linux_amd64_static ./opa
 RUN chmod 755 ./opa && ./opa build -b policies
 RUN rm -r policies && rm opa
 

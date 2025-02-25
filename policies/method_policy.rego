@@ -1,20 +1,17 @@
 package method
 
-import future.keywords.in
-import future.keywords.every
-
-authorized = true {
+authorized = true if {
 	count(allow) > 0
 	count(deny) == 0
 }
 
 # Allow access when all resources are allowed
-allow["AllResourcesAllowed"] {
+allow["AllResourcesAllowed"] if {
 	input.principal.permissions.allowAllResources == true	
 }
 
 # Allow access when all actions are allowed on requested resource 
-allow["AllActionsAllowedOnResource"] {
+allow["AllActionsAllowedOnResource"] if {
 	# find requested resource between permissions
 	some r in input.principal.permissions.resources
 	r.name == input.requestedResource.name
@@ -24,7 +21,7 @@ allow["AllActionsAllowedOnResource"] {
 }
 
 # Allow access when requested action is allowed on requested resource
-allow["ActionAllowedOnResource"] {
+allow["ActionAllowedOnResource"] if {
 	# find requested resource between permissions
 	some r in input.principal.permissions.resources
 	r.name == input.requestedResource.name
@@ -34,7 +31,7 @@ allow["ActionAllowedOnResource"] {
 }
 
 # Allow access when requested action on resource is allowed for some objects and no object UUIDs are specified
-allow["ActionAllowedForSomeObjects"] {
+allow["ActionAllowedForSomeObjects"] if {
 	not input.requestedResource.uuids
 	
 	# find requested resource between permissions
@@ -46,7 +43,7 @@ allow["ActionAllowedForSomeObjects"] {
 }
 
 # Allow access when action is allowed for given objects
-allow["ActionAllowedForSpecificObject"] {
+allow["ActionAllowedForSpecificObject"] if {
 	# requested contains uuids of specific objects
 	input.requestedResource.uuids
 	
@@ -68,7 +65,7 @@ allow["ActionAllowedForSpecificObject"] {
 }
 
 # Allow access when any group object UUIDs is in allowed objects for groups members action
-allow["ActionAllowedForSpecificObjectBasedOnGroupMembership"] {
+allow["ActionAllowedForSpecificObjectBasedOnGroupMembership"] if {
 	# requested contains uuids of specific objects
 	input.requestedResource.uuids
 
@@ -92,7 +89,7 @@ allow["ActionAllowedForSpecificObjectBasedOnGroupMembership"] {
 }
 
 # Allow access when action is ANY and at least one action allowed is allowed for requested resource
-allow["AtLeastOneActionOnResource"] {
+allow["AtLeastOneActionOnResource"] if {
 	# requested action is ANY
 	input.requestedResource.action == "ANY"
 	
@@ -105,7 +102,7 @@ allow["AtLeastOneActionOnResource"] {
 }
 
 # Allow access when action is ANY and at least one action allowed is allowed for requested resource
-allow["AtLeastOneActionOnObject"] {
+allow["AtLeastOneActionOnObject"] if {
 	# Requested action is ANY
 	input.requestedResource.action == "ANY"
 	# requested contains uuids of specific objects
@@ -131,7 +128,7 @@ allow["AtLeastOneActionOnObject"] {
 # TODO no uuids and ANY
 
 # Allows access to anonymous users to selected set of resources
-allow["Anonymous"] {
+allow["Anonymous"] if {
 	# check if user is authenticated as anonymous
 	input.principal.user.username = "anonymousUser"
 	
@@ -149,7 +146,7 @@ allow["Anonymous"] {
 }
 
 # Deny access when requested action is forbidden for given object
-deny["ActionDeniedForSpecificObject"] {
+deny["ActionDeniedForSpecificObject"] if {
 	# requested contains uuids of specific objects
 	input.requestedResource.uuids
 	
