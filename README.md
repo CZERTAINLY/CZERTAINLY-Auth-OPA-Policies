@@ -8,7 +8,6 @@ The following policies are available to evaluate permissions:
 
 | Policy                                           | Short description                                                                                                                                                                                         |
 |--------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Endpoint policy](policies/endpoint_policy.rego) | Contains rules for evaluation of specific cases of authorizing access to endpoints (e.g. access from localhost)                                                                                           |
 | [Method policy](policies/method_policy.rego)     | Contains rules for evaluation of permissions to perform actions on resources, optionally with specified objects UUIDs                                                                                     |
 | [Objects policy](policies/objects_policy.rego)   | Contains rules for evaluation of permissions for actions on resources at object level and provides a list of UUIDs for which the requested action is permitted on the resource and for which it is denied |
 
