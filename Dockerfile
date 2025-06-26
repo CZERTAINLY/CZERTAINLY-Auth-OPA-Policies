@@ -1,4 +1,4 @@
-FROM nginx:1.28.0-alpine AS build
+FROM nginx:1.29.0-alpine AS build
 
 LABEL org.opencontainers.image.authors="CZERTAINLY <support@czertainly.com>"
 
