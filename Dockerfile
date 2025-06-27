@@ -11,6 +11,6 @@ RUN chmod 755 ./opa && ./opa build -b policies
 RUN rm -r policies && rm opa
 
 # package to rootless image
-FROM nginxinc/nginx-unprivileged:1.28.0-alpine
+FROM nginxinc/nginx-unprivileged:1.29.0-alpine
 
 COPY --from=build /usr/share/nginx/html /usr/share/nginx/html
