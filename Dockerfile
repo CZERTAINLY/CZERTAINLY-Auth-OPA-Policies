@@ -1,6 +1,6 @@
 # Add build args to allow easy version updates
 ARG NGINX_BUILD_IMAGE=nginx:1.29.2-alpine
-ARG NGINX_RUN_IMAGE=nginxinc/nginx-unprivileged:1.29.2-alpine
+ARG NGINX_RUN_IMAGE=nginxinc/nginx-unprivileged:1.31.5-alpine
 
 FROM ${NGINX_BUILD_IMAGE} AS build
 
