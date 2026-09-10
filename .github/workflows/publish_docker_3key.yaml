@@ -46,7 +46,7 @@ jobs:
 
       - name: Test build Docker image
         id: build-and-load
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           platforms: linux/amd64
@@ -85,7 +85,7 @@ jobs:
           skip-setup-trivy: true
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         id: build-and-push
         with:
           context: .
